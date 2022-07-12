@@ -1,12 +1,12 @@
 <script>
-	import { highlight } from '../utils/stores.js';
-
 	import { scaleBand, scaleLinear, ascending } from "d3";
 	import Axis from "./Axis.svelte";
 	import DataPoint from "./DataPoint.svelte";
 	
 	export let dataset;
 	export let dataPoint;
+	export let selected;
+	export let onSelect;
 	
 	const width = 500, 
 				height = 700;
@@ -44,10 +44,12 @@
 			  {@const yData = yAccessor(data)}
 				<DataPoint
 					x={0}
+					onSelect={() => onSelect(yData)}
+					onReset={() => onSelect("")}
+					color={yData === selected ? '#fe9922' : 'cornflowerblue'}
 					y={yScale(yData)}
 					width={xScale(xAccessor(data))}
 					height={yScale.bandwidth()}
-					value={yData}
 				/>
 			{/each}
 
