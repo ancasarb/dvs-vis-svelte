@@ -1,5 +1,4 @@
 <script>
-	import { onMount } from "svelte";
 	import { csv } from "d3";
 	import transform from "../utils/transform.js";
 	
@@ -9,7 +8,12 @@
 	import Subheading from "../components/Subheading.svelte";
 
 	let dataset = csv("https://raw.githubusercontent.com/ancasarb/data/main/privacy.csv", transform);
-	
+
+	let selected = "";
+
+	function onSelect(value) {
+		selected = value;
+	}
 </script>
 
 <main>
@@ -28,8 +32,16 @@
 			<Subheading text="(% of individuals who used internet within the last 3 months)" />
 		</div>
 		<div class="chart-row">
-			<Chart dataset={data} dataPoint="have_cookies_knowledge_perc" />
-			<Chart dataset={data} dataPoint="change_default_settings_perc"/>
+			<Chart
+				dataset={data}
+				{onSelect}
+				{selected}
+				dataPoint="have_cookies_knowledge_perc" />
+			<Chart
+				dataset={data}
+				{onSelect}
+				{selected}
+				dataPoint="change_default_settings_perc"/>
 		</div>
 		<div class="title-row"> 
 			<Title text="Individuals use software that limits the ability to track their activities on the internet." />
@@ -40,8 +52,16 @@
 			<Subheading text="(% of individuals who used internet within the last 3 months)" />
 		</div>
 		<div class="chart-row">
-			<Chart dataset={data} dataPoint="use_restrictive_software_perc"/>
-			<Chart dataset={data} dataPoint="manage_personal_data_perc" />
+			<Chart
+				dataset={data}
+				{onSelect}
+				{selected}
+				dataPoint="use_restrictive_software_perc"/>
+			<Chart
+				dataset={data}
+				{onSelect}
+				{selected}
+				dataPoint="manage_personal_data_perc" />
 		</div>
 		{/await}
 	</section>
