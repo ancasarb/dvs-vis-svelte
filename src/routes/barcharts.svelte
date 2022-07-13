@@ -77,20 +77,19 @@
 	main {
 		font-family: 'Inter', sans-serif; 
 		display: flex;
-    flex-direction: column;
+    	flex-direction: column;
 	}
 	
 	.chart-container {
 		display: flex;
-		flex-direction:column;
+		flex-direction: column;
 	}
 	
 	.title-row, .subheading-row, .chart-row {
 		display: flex;
-		flex-direction:row;
+		flex-direction: row;
 		gap: 20px;
-		width:100%;
-		max-width: 1280px;
+		width: 100%;
 	}
 	
 </style>
