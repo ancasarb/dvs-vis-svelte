@@ -1,15 +1,15 @@
 <script>
-	import { csv } from "d3";
-	import transform from "../utils/transform.js";
-	
-	import Chart from "../components/Chart.svelte";
-	import Source from "../components/Source.svelte";
-	import Title from "../components/Title.svelte";
-	import Subheading from "../components/Subheading.svelte";
+	import { csv } from 'd3';
+	import transform from '../utils/transform.js';
 
-	let dataset = csv("https://raw.githubusercontent.com/ancasarb/data/main/privacy.csv", transform);
+	import Chart from '../components/Chart.svelte';
+	import Source from '../components/Source.svelte';
+	import Title from '../components/Title.svelte';
+	import Subheading from '../components/Subheading.svelte';
 
-	let selected = "";
+	let dataset = csv('https://raw.githubusercontent.com/ancasarb/data/main/privacy.csv', transform);
+
+	let selected = '';
 
 	function onSelect(value) {
 		selected = value;
@@ -19,77 +19,69 @@
 <main>
 	<section class="chart-container">
 		{#await dataset}
-			<p>
-				Loading data...
-			</p>
+			<p>Loading data...</p>
 		{:then data}
-		<div class="title-row"> 
-			<Title text="Individuals know that cookies can be used to trace movements of people on the internet." />
-			<Title text="Individuals have ever changed the settings in their internet browser to prevent or limit cookies on any of their devices." />
-		</div>
-		<div class="subheading-row">
+			<Title
+				text="Individuals know that cookies can be used to trace movements of people on the internet."
+			/>
 			<Subheading text="(% of individuals who used internet within the last 3 months)" />
+			<Chart dataset={data} {onSelect} {selected} dataPoint="have_cookies_knowledge_perc" />
+			<Title
+				text="Individuals have ever changed the settings in their internet browser to prevent or limit cookies on any of their devices."
+			/>
 			<Subheading text="(% of individuals who used internet within the last 3 months)" />
-		</div>
-		<div class="chart-row">
-			<Chart
-				dataset={data}
-				{onSelect}
-				{selected}
-				dataPoint="have_cookies_knowledge_perc" />
-			<Chart
-				dataset={data}
-				{onSelect}
-				{selected}
-				dataPoint="change_default_settings_perc"/>
-		</div>
-		<div class="title-row"> 
-			<Title text="Individuals use software that limits the ability to track their activities on the internet." />
+			<Chart dataset={data} {onSelect} {selected} dataPoint="change_default_settings_perc" />
+
+			<Title
+				text="Individuals use software that limits the ability to track their activities on the internet."
+			/>
+			<Subheading text="(% of individuals who used internet within the last 3 months)" />
+			<Chart dataset={data} {onSelect} {selected} dataPoint="use_restrictive_software_perc" />
+
 			<Title text="Individuals manage access to personal data on the internet." />
-		</div>
-		<div class="subheading-row">
 			<Subheading text="(% of individuals who used internet within the last 3 months)" />
-			<Subheading text="(% of individuals who used internet within the last 3 months)" />
-		</div>
-		<div class="chart-row">
-			<Chart
-				dataset={data}
-				{onSelect}
-				{selected}
-				dataPoint="use_restrictive_software_perc"/>
-			<Chart
-				dataset={data}
-				{onSelect}
-				{selected}
-				dataPoint="manage_personal_data_perc" />
-		</div>
+			<Chart dataset={data} {onSelect} {selected} dataPoint="manage_personal_data_perc" />
 		{/await}
 	</section>
 	<section class="footer">
-		<Source/>
+		<Source />
 	</section>
-	
 </main>
 
 <style>
+	/* CSS Reset: https://www.joshwcomeau.com/css/custom-css-reset/ */
+	:global(*) {
+		margin: 0;
+	}
+
+	:global(p) {
+		margin-bottom: 1rem;
+	}
+
+	:global(body) {
+		margin: 1rem;
+	}
+	/* End of CSS reset */
+
 	@import url('https://rsms.me/inter/inter.css');
-	
+
 	main {
-		font-family: 'Inter', sans-serif; 
-		display: flex;
-    	flex-direction: column;
+		font-family: 'Inter', sans-serif;
+		font-size: 16px;
 	}
-	
+
+	@media screen and (max-width: 1000px) {
+		main {
+			font-size: 12px;
+		}
+	}
+
 	.chart-container {
-		display: flex;
-		flex-direction: column;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: min-content min-content 1fr min-content min-content 1fr;
+		grid-column-gap: 20px;
+		grid-row-gap: 0;
+		grid-auto-flow: column;
 	}
-	
-	.title-row, .subheading-row, .chart-row {
-		display: flex;
-		flex-direction: row;
-		gap: 20px;
-		width: 100%;
-	}
-	
 </style>
