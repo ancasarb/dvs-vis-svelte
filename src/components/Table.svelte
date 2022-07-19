@@ -10,10 +10,6 @@
 
 	$: option = 'total';
 
-    $:{
-        console.log(option);
-    }
-
 	const columnHeadings = [
 		['Sea-level model'],
 		['Emissions'],
