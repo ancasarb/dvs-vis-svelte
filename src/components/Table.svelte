@@ -12,8 +12,8 @@
 
 	const columnHeadings = [
 		['Sea-level model'],
-		['Emissions'],
-		['Frequency'],
+		['Emission level'],
+		['Exposure frequency'],
 		['Year 2050', '(population in millions)'],
 		['Exposure increase', '(population in millions)'],
 		['Year 2100', '(population in millions)'],
