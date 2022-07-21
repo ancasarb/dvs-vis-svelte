@@ -1,7 +1,9 @@
 <script>
 	import Select from './Select.svelte';
-    import TableBody from './TableBody.svelte';
+	import TableBody from './TableBody.svelte';
 	import TableHeading from './TableHeading.svelte';
+	import TableSource from './TableSource.svelte';
+import TableTitle from './TableTitle.svelte';
 
 	export let dataset;
 
@@ -39,10 +41,14 @@
 
 <Select bind:option {options} text="choose between..." />
 
+<TableTitle />
+
 <table>
 	<TableHeading {headings} />
-	<TableBody {dataset} {option}/>
+	<TableBody {dataset} {option} />
 </table>
+
+<TableSource />
 
 <style>
 	table {
