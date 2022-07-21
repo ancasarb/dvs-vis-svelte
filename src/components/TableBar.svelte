@@ -1,6 +1,4 @@
 <script>
-	export let width;
-	export let height;
 	export let color;
 	export let scale;
 	export let value;
@@ -8,8 +6,28 @@
 	$: chartWidth = scale(value);
 </script>
 
-<svg {width} {height}>
-	<rect x={0} y={0} width={chartWidth} {height} fill={color} />
-	<text x={5} y={height - 3} fill="black">{value}</text>
-	<slot name="annotation" x={chartWidth + 1} y={height - 3} />
-</svg>
+<div class="container">
+	<div class="bar" style={`width: ${chartWidth}px; background-color: ${color}`}>
+		{value}
+	</div>
+	<span class="annotation"><slot /></span>
+</div>
+
+<style>
+	.container {
+		display: flex;
+		align-items: center;
+	}
+
+	.bar {
+		height: 15px;
+		margin-right: 5px;
+		padding-left: 5px;
+		flex-grow: 0;
+		flex-shrink: 0;
+	}
+
+	.annotation {
+		white-space: nowrap;
+	}
+</style>

@@ -7,6 +7,7 @@
 	export let dataset;
 	export let option;
 
+	// NOTE: These conditions on 'i' are unreadable
 	const seaLevelProjectionModelAccessor = (d, i) =>
 		i % 6 === 0 ? d['sea_level_projection_model'] : '';
 
@@ -92,19 +93,11 @@
 				/>
 			</td>
 			<td>
-				<TableBar
-					height={dimensions.height}
-					width={dimensions.width.bar}
-					value={differenceAccessor2050(row)}
-					scale={xScaleBar}
-					index={i}
-					{color}
-				>
-					<g slot="annotation" let:x let:y>
-						{#if i === 0}
-							<text fill="black" {x} {y}>* from previous estimate</text>
-						{/if}
-					</g>
+				<TableBar value={differenceAccessor2050(row)} scale={xScaleBar} {color}>
+					{#if i === 0}
+						<!-- NOTE: i equals 0 is meaningless, readability suffers, we should name this condition -->
+						* from previous estimate
+					{/if}
 				</TableBar>
 			</td>
 			<td>
@@ -118,19 +111,17 @@
 				/>
 			</td>
 			<td>
-				<TableBar
-					height={dimensions.height}
-					width={dimensions.width.bar}
-					value={differenceAccessor2100(row)}
-					scale={xScaleBar}
-					{color}
-				/>
+				<TableBar value={differenceAccessor2100(row)} scale={xScaleBar} {color} />
 			</td>
 		</tr>
 	{/each}
 </tbody>
 
 <style>
+	tr:nth-child(odd) {
+		background-color: #eee;
+	}
+
 	td {
 		padding: 3px 2px;
 		font-size: 13px;
