@@ -14,7 +14,7 @@
 
 	const y = height - 3;
 	const radius = 1;
-	
+
 	const stroke = 'black';
 </script>
 
