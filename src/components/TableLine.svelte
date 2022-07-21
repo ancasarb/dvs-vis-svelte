@@ -16,16 +16,6 @@
 	const radius = 1;
 
 	const stroke = 'black';
-
-	$: visibility = 'hidden';
-
-	function show() {
-		visibility = 'visible';
-	}
-
-	function hide() {
-		visibility = 'hidden';
-	}
 </script>
 
 <svg {width} {height}>
@@ -36,18 +26,11 @@
 	<circle cx={xStart} cy={y} r={radius} {stroke} />
 	<circle cx={xValue} cy={y} r={radius} {stroke} />
 	<circle cx={xEnd} cy={y} r={radius} {stroke} />
-	<text class={visibility} x={xStart} y={y - 3}>
+	<text class="tooltip" x={xStart} y={y - 3}>
 		{start} -> {value} -> {end}
 	</text>
 
-	<rect
-		x={xStart}
-		y={y - 2.5}
-		width={xEnd - xStart}
-		height={5}
-		on:mouseover={show}
-		on:mouseout={hide}
-	/>
+	<rect x={xStart} y={y - 2.5} width={xEnd - xStart} height={5} />
 </svg>
 
 <style>
@@ -55,15 +38,12 @@
 		font-size: 13px;
 	}
 
-	.hidden,
-	.visible {
+	.tooltip {
+		visibility: hidden;
 		font-size: 10px;
 	}
 
-	.hidden {
-		visibility: hidden;
-	}
-	.visible {
+	svg:hover .tooltip {
 		visibility: visible;
 	}
 
