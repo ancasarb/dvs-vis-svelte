@@ -3,7 +3,7 @@
 	import TableBody from './TableBody.svelte';
 	import TableHeading from './TableHeading.svelte';
 	import TableSource from './TableSource.svelte';
-import TableTitle from './TableTitle.svelte';
+	import TableTitle from './TableTitle.svelte';
 
 	export let dataset;
 
