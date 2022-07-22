@@ -6,9 +6,9 @@
 	<tr>
 		{#each headings as heading}
 			<th>
-				<p>{@html heading.main}</p>
+				<p>{heading.main}</p>
 				{#if heading.additional}
-					<p class="extra-heading">{@html heading.additional}</p>
+					<p class="extra-heading">{heading.additional}</p>
 				{/if}
 			</th>
 		{/each}
