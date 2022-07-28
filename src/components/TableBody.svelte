@@ -93,7 +93,13 @@
 				/>
 			</td>
 			<td>
-				<TableBar value={differenceAccessor2050(row)} scale={xScaleBar} {color}>
+				<TableBar
+					width={dimensions.width.bar}
+					height={dimensions.height}
+					value={differenceAccessor2050(row)}
+					scale={xScaleBar}
+					{color}
+				>
 					{#if i === 0}
 						<!-- NOTE: i equals 0 is meaningless, readability suffers, we should name this condition -->
 						* from previous estimate
@@ -111,7 +117,13 @@
 				/>
 			</td>
 			<td>
-				<TableBar value={differenceAccessor2100(row)} scale={xScaleBar} {color} />
+				<TableBar
+					value={differenceAccessor2100(row)}
+					scale={xScaleBar}
+					{color}
+					width={dimensions.width.bar}
+					height={dimensions.height}
+				/>
 			</td>
 		</tr>
 	{/each}
