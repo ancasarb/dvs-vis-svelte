@@ -1,5 +1,6 @@
 <script>
 	import { tweened } from 'svelte/motion';
+	import { fly } from 'svelte/transition';
 
 	export let width;
 	export let height;
@@ -25,9 +26,11 @@
 </script>
 
 <svg {width} {height}>
-	<text x={0} {y}>
-		{value}
-	</text>
+	{#key value}
+		<text x={0} {y} in:fly={{ y: -20 }}>
+			{value}
+		</text>
+	{/key}
 	<line x1={$xStart} y1={y} x2={$xEnd} y2={y} {stroke} />
 	<circle cx={$xStart} cy={y} r={radius} {stroke} />
 	<circle cx={$xValue} cy={y} r={radius} {stroke} />
