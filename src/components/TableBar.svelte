@@ -1,13 +1,20 @@
 <script>
+	import { tweened } from 'svelte/motion';
+
 	export let color;
 	export let scale;
 	export let value;
+	export let width;
+	export let height;
 
-	$: chartWidth = scale(value);
+	const initialValue = scale(value);
+	const barWidth = tweened(initialValue, { duration: 400 });
+
+	$: barWidth.set(scale(value));
 </script>
 
-<div class="container">
-	<div class="bar" style={`width: ${chartWidth}px; background-color: ${color}`}>
+<div class="container" style="width: {width}px">
+	<div class="bar" style={`height: ${height}px; width: ${$barWidth}px; background-color: ${color}`}>
 		{value}
 	</div>
 	<span class="annotation"><slot /></span>
@@ -20,7 +27,6 @@
 	}
 
 	.bar {
-		height: 15px;
 		margin-right: 5px;
 		padding-left: 5px;
 		flex-grow: 0;
@@ -29,5 +35,7 @@
 
 	.annotation {
 		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 </style>
